@@ -37,15 +37,12 @@ namespace TP2_Series_API_Web.Controllers
         public async Task<ActionResult<Serie>> GetSerie(int id)
         {
             if (_context.Series == null)
-            {
                 return NotFound();
-            }
-            var serie = await _context.Series.FindAsync(id);
+
+            Serie? serie = await _context.Series.FindAsync(id);
 
             if (serie == null)
-            {
                 return NotFound();
-            }
 
             return serie;
         }
