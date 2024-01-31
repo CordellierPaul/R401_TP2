@@ -85,7 +85,7 @@ namespace TP2_Series_API_Web.Controllers.Tests
         public void GetSerieTestEchec()
         {
             // Act
-            ActionResult<Serie> resultat = _seriesController.GetSerie(10000).Result;
+            ActionResult<Serie> resultat = _seriesController.GetSerie(10002).Result;
 
             // Assert
             NotFoundResult? resultatErreur = resultat.Result as NotFoundResult;
@@ -97,7 +97,7 @@ namespace TP2_Series_API_Web.Controllers.Tests
         public void DeleteSerieTest()
         {
             // Crée une série fictive pour supprimer
-            var serieToDelete = new Serie
+            var serieASupprier = new Serie
             {
                 Serieid = 10000,
                 Titre = "Série à supprimer",
@@ -108,16 +108,90 @@ namespace TP2_Series_API_Web.Controllers.Tests
                 Network = "Test Network"
             };
 
-            // Ajoute la série fictive à la base de données pour la supprimer ensuite
-            _seriesContext.Series.Add(serieToDelete);
+            _seriesContext.Series.Add(serieASupprier);
             _seriesContext.SaveChanges();
-            _seriesController.DeleteSerie(serieToDelete.Serieid).RunSynchronously();
+
+            // Ajoute la série fictive à la base de données pour la supprimer ensuite
+            _seriesController.DeleteSerie(serieASupprier.Serieid).Wait();
 
             List<Serie> listeSeriesRecuperees = _seriesController.GetSeries().Result.Value!.ToList();
 
             // Vérifie si la série a été supprimée en essayant de la récupérer
-            var deletedSerie = listeSeriesRecuperees.FirstOrDefault(s => s.Serieid == serieToDelete.Serieid);
+            var deletedSerie = listeSeriesRecuperees.FirstOrDefault(s => s.Serieid == serieASupprier.Serieid);
             Assert.IsNull(deletedSerie, "La série n'a pas été supprimée de la base de données.");
+        }
+
+        [TestMethod()]
+        public void PostSerieTest()
+        {
+            // Arrange
+            Serie serieAPoster = new Serie
+            {
+                Serieid = 10010,
+                Titre = "Série à publier",
+                Resume = "Résumé de la série à publier...",
+                Nbsaisons = 5,
+                Nbepisodes = 50,
+                Anneecreation = 2020,
+                Network = "Test Network"
+            };
+
+            // Act
+            _seriesController.PostSerie(serieAPoster).Wait();
+            Serie? serieTrouvee = _seriesContext.Series.ToArray().FirstOrDefault(x => x == serieAPoster);
+
+            // Assert
+            Assert.AreEqual(serieAPoster, serieTrouvee, "La série publiée et celle retrouvée dans la base de données n'est pas la même.");
+
+            _seriesContext.Series.Remove(serieAPoster);
+            _seriesContext.SaveChanges();
+        }
+
+        [TestMethod()]
+        public void PutSerieTest()
+        {
+            // Le code ne marche pas. Code pour debug :
+
+            // select * from serie
+            // delete from serie where serieid = 10100
+
+            int id = 10100;
+
+            // Arrange
+            Serie serieAvant = new Serie
+            {
+                Serieid = id,
+                Titre = "Série qui va être modifiée",
+                Resume = "Résumé",
+                Nbsaisons = 1,
+                Nbepisodes = 9,
+                Anneecreation = 1958,
+                Network = "Test Network"
+            };
+
+            Serie serieApres = new Serie
+            {
+                Serieid = id,
+                Titre = "Série qui apporte les modifications",
+                Resume = "Résumé",
+                Nbsaisons = 5,
+                Nbepisodes = 102,
+                Anneecreation = 2077,
+                Network = "Test Network"
+            };
+
+            _seriesContext.Series.Add(serieAvant);
+
+            // Act
+            _seriesController.PutSerie(id, serieApres).Wait();
+            _seriesContext.SaveChanges();
+
+            // Assert
+            Serie? serieTrouvee = _seriesContext.Series.ToArray().FirstOrDefault(x => x.Serieid == id);
+            Assert.AreEqual(serieApres, serieTrouvee, "La série modifiée et celle retrouvée dans la base de données n'est pas la même.");
+
+            _seriesContext.Series.Remove(serieTrouvee!);
+            _seriesContext.SaveChanges();
         }
     }
 }
