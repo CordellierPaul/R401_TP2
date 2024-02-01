@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="TP2_Series_Bureau.Views.AjouterSerieView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:TP2_Series_Bureau.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d">
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+        <TextBlock
+            Margin="0,0,0,5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Titre" />
+
+        <TextBox
+            Width="500"
+            Margin="0,0,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="{Binding SerieAAjouter.Titre, Mode=TwoWay}" />
+
+
+        <TextBlock
+            Margin="0,0,0,5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Résumé" />
+
+        <TextBox
+            Width="500"
+            Height="200"
+            Margin="0,0,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="{Binding SerieAAjouter.Resume, Mode=TwoWay}" />
+
+
+        <TextBlock
+            Margin="0,0,0,5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Nombre de saisions" />
+
+        <NumberBox
+            Margin="0,0,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="{Binding SerieAAjouter.Nbsaisons, Mode=TwoWay}" />
+
+
+        <TextBlock
+            Margin="0,0,0,5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Nombre d'épisides" />
+
+        <NumberBox
+            Margin="0,0,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="{Binding SerieAAjouter.Nbepisodes, Mode=TwoWay}" />
+
+
+        <TextBlock
+            Margin="0,0,0,5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Année de création" />
+
+        <NumberBox
+            Margin="0,0,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="{Binding SerieAAjouter.Anneecreation, Mode=TwoWay}" />
+
+
+
+
+
+
+        <Button
+            Margin="0,0,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Command="{Binding BtnAjouter}"
+            Content="Ajouter" />
+
+    </StackPanel>
+</Page>
