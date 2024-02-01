@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "TP2_Series_Bureau (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "TP2_Series_Bureau (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
