@@ -20,7 +20,7 @@ namespace TP2_Series_API_Web.Controllers.Tests
             _seriesContext = new seriesContext(builder.Options);
             _seriesController = new SeriesController(_seriesContext);
 
-            _serieTestId1 = new Serie
+            _serieTestId1 = new Serie()
             {
                 Serieid = 1,
                 Titre = "Scrubs",
@@ -31,7 +31,7 @@ namespace TP2_Series_API_Web.Controllers.Tests
                 Network = "ABC (US)"
             };
 
-            _serieTestId3 = new Serie
+            _serieTestId3 = new Serie()
             {
                 Serieid = 3,
                 Titre = "True Blood",
@@ -97,7 +97,7 @@ namespace TP2_Series_API_Web.Controllers.Tests
         public void DeleteSerieTest()
         {
             // Crée une série fictive pour supprimer
-            var serieASupprier = new Serie
+            var serieASupprier = new Serie()
             {
                 Serieid = 10000,
                 Titre = "Série à supprimer",
@@ -125,7 +125,7 @@ namespace TP2_Series_API_Web.Controllers.Tests
         public void PostSerieTest()
         {
             // Arrange
-            Serie serieAPoster = new Serie
+            Serie serieAPoster = new Serie()
             {
                 Serieid = 10010,
                 Titre = "Série à publier",
@@ -150,45 +150,26 @@ namespace TP2_Series_API_Web.Controllers.Tests
         [TestMethod()]
         public void PutSerieTest()
         {
-            // Le code ne marche pas. Code pour debug :
+            const int id = 3;
 
-            // select * from serie
-            // delete from serie where serieid = 10100
-
-            int id = 10100;
-
-            // Arrange
-            Serie serieAvant = new Serie
+            Serie serieModifieeId3 = new Serie()
             {
-                Serieid = id,
-                Titre = "Série qui va être modifiée",
-                Resume = "Résumé",
-                Nbsaisons = 1,
-                Nbepisodes = 9,
-                Anneecreation = 1958,
-                Network = "Test Network"
-            };
-
-            Serie serieApres = new Serie
-            {
-                Serieid = id,
-                Titre = "Série qui apporte les modifications",
-                Resume = "Résumé",
-                Nbsaisons = 5,
-                Nbepisodes = 102,
+                Serieid = 3,
+                Titre = "True Blood",
+                Resume = "Nouveau résumé qui à changé",
+                Nbsaisons = 7,
+                Nbepisodes = 81,
                 Anneecreation = 2077,
-                Network = "Test Network"
+                Network = "HBO"
             };
-
-            _seriesContext.Series.Add(serieAvant);
 
             // Act
-            _seriesController.PutSerie(id, serieApres).Wait();
+            _seriesController.PutSerie(id, serieModifieeId3).Wait();
             _seriesContext.SaveChanges();
 
             // Assert
             Serie? serieTrouvee = _seriesContext.Series.ToArray().FirstOrDefault(x => x.Serieid == id);
-            Assert.AreEqual(serieApres, serieTrouvee, "La série modifiée et celle retrouvée dans la base de données n'est pas la même.");
+            Assert.AreEqual(serieModifieeId3, serieTrouvee, "La série modifiée et celle retrouvée dans la base de données n'est pas la même.");
 
             _seriesContext.Series.Remove(serieTrouvee!);
             _seriesContext.SaveChanges();
