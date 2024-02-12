@@ -51,7 +51,8 @@ namespace TP2_Series_Bureau.Services
 
         public async Task PutSerieAsync(int id, Serie serie)
         {
-            throw new NotImplementedException();
+            HttpResponseMessage response = await _httpClient.PutAsJsonAsync(UriOfApi + "/" + id, serie);
+            response.EnsureSuccessStatusCode();
         }
         
         public async Task PostSerieAsync(Serie serie)

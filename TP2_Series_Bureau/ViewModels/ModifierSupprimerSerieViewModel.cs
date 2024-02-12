@@ -29,11 +29,13 @@ namespace TP2_Series_Bureau.ViewModels
 
         public IRelayCommand BtnRechercher { get; set; }
         public IRelayCommand BtnSupprimer { get; set; }
+        public IRelayCommand BtnModifier { get; set; }
 
         public ModifierSupprimerSerieViewModel()
         {
             BtnRechercher = new RelayCommand(async () => await GetSerie());
             BtnSupprimer = new RelayCommand(async () => await DeleteSerie());
+            BtnModifier = new RelayCommand(async () => await ModifierSerie());
         }
 
         private async Task GetSerie()
@@ -58,7 +60,25 @@ namespace TP2_Series_Bureau.ViewModels
             catch (Exception ex)
             {
                 await MessageAsync("Erreur lors de la suppression :\n" + ex, "Erreur");
+                return;
             }
+
+            ID = 0;
+            SerieSelectionnee = new Serie();
+        }
+
+        private async Task ModifierSerie()
+        {
+            try
+            {
+                await _service.PutSerieAsync(ID, SerieSelectionnee);
+            }
+            catch (Exception ex)
+            {
+                await MessageAsync("Erreur lors de la modification : \n" + ex, "Erreur");
+                return;
+            }
+
         }
     }
 }

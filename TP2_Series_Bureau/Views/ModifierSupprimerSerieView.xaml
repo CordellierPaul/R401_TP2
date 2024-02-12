@@ -110,8 +110,8 @@
 
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
 
-            <Button Command="{Binding BtnModifierSerie}" Content="Modifier" />
-            <Button Command="{Binding BtnSupprimerSupprimer}" Content="Supprimer" />
+            <Button Command="{Binding BtnModifier}" Content="Modifier" />
+            <Button Command="{Binding BtnSupprimer}" Content="Supprimer" />
 
         </StackPanel>
 
