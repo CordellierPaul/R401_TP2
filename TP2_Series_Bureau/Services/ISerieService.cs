@@ -11,11 +11,11 @@ namespace TP2_Series_Bureau.Services
     {
         public Task<IEnumerable<Serie>?> GetSeriesAsync();
 
-        public Task<Serie?> GetSerieAsync();
+        public Task<Serie?> GetSerieAsync(int id);
 
-        public Task PutSerieAsync();
+        public Task PutSerieAsync(int id, Serie serie);
 
-        public Task<Serie?> PostSerieAsync();
+        public Task PostSerieAsync(Serie serie);
 
         public Task DeleteSerieAsync();
     }

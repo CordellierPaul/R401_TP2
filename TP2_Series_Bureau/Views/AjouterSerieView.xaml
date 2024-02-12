@@ -22,7 +22,7 @@
             Margin="0,0,0,10"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Text="{Binding SerieAAjouter.Titre, Mode=TwoWay}" />
+            Text="{Binding SerieSelectionnee.Titre, Mode=TwoWay}" />
 
 
         <TextBlock
@@ -33,11 +33,11 @@
 
         <TextBox
             Width="500"
-            Height="200"
+            Height="100"
             Margin="0,0,0,10"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Text="{Binding SerieAAjouter.Resume, Mode=TwoWay}" />
+            Text="{Binding SerieSelectionnee.Resume, Mode=TwoWay}" />
 
 
         <TextBlock
@@ -50,7 +50,7 @@
             Margin="0,0,0,10"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Text="{Binding SerieAAjouter.Nbsaisons, Mode=TwoWay}" />
+            Text="{Binding SerieSelectionnee.Nbsaisons, Mode=TwoWay}" />
 
 
         <TextBlock
@@ -63,7 +63,7 @@
             Margin="0,0,0,10"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Text="{Binding SerieAAjouter.Nbepisodes, Mode=TwoWay}" />
+            Text="{Binding SerieSelectionnee.Nbepisodes, Mode=TwoWay}" />
 
 
         <TextBlock
@@ -76,18 +76,28 @@
             Margin="0,0,0,10"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Text="{Binding SerieAAjouter.Anneecreation, Mode=TwoWay}" />
+            Text="{Binding SerieSelectionnee.Anneecreation, Mode=TwoWay}" />
 
 
+        <TextBlock
+            Margin="0,0,0,5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Chaîne" />
 
-
-
-
-        <Button
+        <TextBox
+            Width="150"
             Margin="0,0,0,10"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Command="{Binding BtnAjouter}"
+            Text="{Binding SerieSelectionnee.Network, Mode=TwoWay}" />
+
+
+        <Button
+            Margin="0,20,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Command="{Binding BtnAjouterSerie}"
             Content="Ajouter" />
 
     </StackPanel>

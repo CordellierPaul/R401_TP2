@@ -11,7 +11,7 @@ namespace TP2_Series_Bureau.Services
 {
     public class WSSerieService : ISerieService
     {
-        private const string UriOfApi = "https://apiseriescordellp.azurewebsites.net/api/";
+        private const string UriOfApi = "https://apiseriescordellp.azurewebsites.net/api/series";
         private HttpClient _httpClient;
 
         public WSSerieService()
@@ -34,22 +34,23 @@ namespace TP2_Series_Bureau.Services
             }
         }
 
-        public Task<Serie?> GetSerieAsync()
+        public async Task<Serie?> GetSerieAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task PutSerieAsync()
+        public async Task PutSerieAsync(int id, Serie serie)
         {
             throw new NotImplementedException();
         }
-
-        public Task<Serie?> PostSerieAsync()
+        
+        public async Task PostSerieAsync(Serie serie)
         {
-            throw new NotImplementedException();
+            var response = await _httpClient.PostAsJsonAsync(UriOfApi, serie);
+            response.EnsureSuccessStatusCode();
         }
 
-        public Task DeleteSerieAsync()
+        public async Task DeleteSerieAsync()
         {
             throw new NotImplementedException();
         }
