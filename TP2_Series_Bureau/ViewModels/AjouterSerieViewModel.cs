@@ -10,6 +10,7 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml.Controls;
 using TP2_Series_Bureau.Models;
 using TP2_Series_Bureau.Services;
+using TP2_Series_Bureau.Views;
 
 namespace TP2_Series_Bureau.ViewModels
 {
@@ -17,7 +18,7 @@ namespace TP2_Series_Bureau.ViewModels
     {
         public IRelayCommand BtnAjouterSerie { get; }
 
-        public AjouterSerieViewModel()
+        public AjouterSerieViewModel() : base()
         {
             BtnAjouterSerie = new RelayCommand(async () => await AjouterSerie());
         }
@@ -60,6 +61,11 @@ namespace TP2_Series_Bureau.ViewModels
             {
                 await MessageAsync("La requête a échouée.\nMessage d'erreur :\n" + ex, "Erreur");
             }
+        }
+
+        protected override void ChangerDePage()
+        {
+            App.Current.RootFrame!.Navigate(typeof(ModifierSupprimerSerieView));
         }
     }
 }

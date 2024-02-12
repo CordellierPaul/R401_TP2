@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,15 @@ namespace TP2_Series_Bureau.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        public IRelayCommand BtnChangementPage { get; set; }
+
+        public BaseViewModel() : base()
+        {
+            BtnChangementPage = new RelayCommand(ChangerDePage);
+        }
+
+        protected abstract void ChangerDePage();
 
         protected async Task MessageAsync(string content, string title)
         {

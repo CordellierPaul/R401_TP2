@@ -100,5 +100,13 @@
             Command="{Binding BtnAjouterSerie}"
             Content="Ajouter" />
 
+
+        <Button
+            Margin="0,20,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Command="{Binding BtnChangementPage}"
+            Content="Changer de page" />
+
     </StackPanel>
 </Page>

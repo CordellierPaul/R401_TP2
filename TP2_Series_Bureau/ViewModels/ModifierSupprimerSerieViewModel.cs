@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TP2_Series_Bureau.Models;
 using TP2_Series_Bureau.Services;
+using TP2_Series_Bureau.Views;
 
 namespace TP2_Series_Bureau.ViewModels
 {
@@ -26,12 +27,11 @@ namespace TP2_Series_Bureau.ViewModels
             }
         }
 
-
         public IRelayCommand BtnRechercher { get; set; }
         public IRelayCommand BtnSupprimer { get; set; }
         public IRelayCommand BtnModifier { get; set; }
 
-        public ModifierSupprimerSerieViewModel()
+        public ModifierSupprimerSerieViewModel() : base()
         {
             BtnRechercher = new RelayCommand(async () => await GetSerie());
             BtnSupprimer = new RelayCommand(async () => await DeleteSerie());
@@ -78,7 +78,11 @@ namespace TP2_Series_Bureau.ViewModels
                 await MessageAsync("Erreur lors de la modification : \n" + ex, "Erreur");
                 return;
             }
+        }
 
+        protected override void ChangerDePage()
+        {
+            App.Current.RootFrame!.Navigate(typeof(AjouterSerieView));
         }
     }
 }
