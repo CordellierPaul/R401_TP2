@@ -19,7 +19,6 @@ namespace TP2_Series_Bureau.ViewModels
 
         public AjouterSerieViewModel()
         {
-            SerieSelectionnee = new Serie();
             BtnAjouterSerie = new RelayCommand(async () => await AjouterSerie());
         }
 

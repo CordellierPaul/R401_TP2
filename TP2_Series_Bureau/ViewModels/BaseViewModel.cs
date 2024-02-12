@@ -12,7 +12,7 @@ namespace TP2_Series_Bureau.ViewModels
 {
     public abstract class BaseViewModel : ObservableObject
     {
-        private Serie _serieSelectionnee;
+        private Serie _serieSelectionnee = new Serie();
         public Serie SerieSelectionnee
         {
             get => _serieSelectionnee;

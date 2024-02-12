@@ -65,7 +65,7 @@ namespace TP2_Series_Bureau.Services
             HttpResponseMessage response = await _httpClient.DeleteAsync(UriOfApi + "/" + id);
 
             if (response.StatusCode == HttpStatusCode.NotFound)
-                throw new Exception("")
+                throw new Exception("L'identifiant ID n'appartient à aucune série.");
 
             response.EnsureSuccessStatusCode();
         }
