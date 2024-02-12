@@ -17,6 +17,6 @@ namespace TP2_Series_Bureau.Services
 
         public Task PostSerieAsync(Serie serie);
 
-        public Task DeleteSerieAsync();
+        public Task DeleteSerieAsync(int id);
     }
 }

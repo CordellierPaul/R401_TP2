@@ -28,6 +28,7 @@ namespace TP2_Series_Bureau
 
             // ViewModels :
             services.AddTransient<AjouterSerieViewModel>();
+            services.AddTransient<ModifierSupprimerSerieViewModel>();
 
             Services = services.BuildServiceProvider();
         }
@@ -40,7 +41,7 @@ namespace TP2_Series_Bureau
         /// Invoked when the application is launched.
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+        protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
             m_window = new MainWindow();
             // Création d'un Frame qui agira comme le contexte de naviagtion
@@ -50,7 +51,7 @@ namespace TP2_Series_Bureau
             // On active la fenêtre actuelle
             m_window.Activate();
             // Navigation à la première page
-            RootFrame.Navigate(typeof(AjouterSerieView));
+            RootFrame.Navigate(typeof(ModifierSupprimerSerieView));
 
             MainRoot = (FrameworkElement)m_window.Content;
         }

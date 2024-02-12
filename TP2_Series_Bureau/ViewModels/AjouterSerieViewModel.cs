@@ -13,38 +13,14 @@ using TP2_Series_Bureau.Services;
 
 namespace TP2_Series_Bureau.ViewModels
 {
-    public class AjouterSerieViewModel : ObservableObject
+    public class AjouterSerieViewModel : BaseViewModel
     {
-        private Serie _serieSelectionnee;
-        public Serie SerieSelectionnee
-        {
-            get => _serieSelectionnee;
-            set
-            {
-                _serieSelectionnee = value;
-                OnPropertyChanged();
-            }
-        }
-
         public IRelayCommand BtnAjouterSerie { get; }
 
         public AjouterSerieViewModel()
         {
-            _serieSelectionnee = new Serie();
+            SerieSelectionnee = new Serie();
             BtnAjouterSerie = new RelayCommand(async () => await AjouterSerie());
-        }
-
-        private async Task MessageAsync(string content, string title)
-        {
-            var messageDialog = new ContentDialog
-            {
-                Title = title,
-                Content = content,
-                CloseButtonText = "OK"
-            };
-
-            messageDialog.XamlRoot = App.MainRoot!.XamlRoot;
-            await messageDialog.ShowAsync();
         }
 
         private async Task AjouterSerie()

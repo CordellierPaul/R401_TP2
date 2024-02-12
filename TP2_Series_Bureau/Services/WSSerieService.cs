@@ -6,6 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TP2_Series_Bureau.Models;
+using Windows.Web.Http.Diagnostics;
+using System.Net;
+using Windows.Services.Maps;
 
 namespace TP2_Series_Bureau.Services
 {
@@ -26,17 +29,24 @@ namespace TP2_Series_Bureau.Services
         {
             try
             {
-                return await _httpClient.GetFromJsonAsync<List<Serie>>("series");
+                return await _httpClient.GetFromJsonAsync<List<Serie>>(UriOfApi);
             }
             catch (Exception)
             {
-                return default;
+                return null;
             }
         }
 
         public async Task<Serie?> GetSerieAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await _httpClient.GetFromJsonAsync<Serie>(UriOfApi + "/" + id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public async Task PutSerieAsync(int id, Serie serie)
@@ -46,13 +56,18 @@ namespace TP2_Series_Bureau.Services
         
         public async Task PostSerieAsync(Serie serie)
         {
-            var response = await _httpClient.PostAsJsonAsync(UriOfApi, serie);
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync(UriOfApi, serie);
             response.EnsureSuccessStatusCode();
         }
 
-        public async Task DeleteSerieAsync()
+        public async Task DeleteSerieAsync(int id)
         {
-            throw new NotImplementedException();
+            HttpResponseMessage response = await _httpClient.DeleteAsync(UriOfApi + "/" + id);
+
+            if (response.StatusCode == HttpStatusCode.NotFound)
+                throw new Exception("")
+
+            response.EnsureSuccessStatusCode();
         }
     }
 }
